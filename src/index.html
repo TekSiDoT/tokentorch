@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claude Meter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <button id="close-btn" title="Close">&times;</button>
+    <div id="bars-container">
+      <div class="usage-row" id="session-row">
+        <span class="label">Session</span>
+        <div class="bar-container">
+          <div class="bar-fill" id="session-fill"></div>
+        </div>
+        <span class="percent" id="session-pct">--%</span>
+        <span class="reset" id="session-reset">--</span>
+        <span class="projected" id="session-projected"></span>
+      </div>
+      <div class="usage-row" id="weekly-row">
+        <span class="label">Weekly</span>
+        <div class="bar-container">
+          <div class="bar-fill" id="weekly-fill"></div>
+        </div>
+        <span class="percent" id="weekly-pct">--%</span>
+        <span class="reset" id="weekly-reset">--</span>
+        <span class="projected" id="weekly-projected"></span>
+      </div>
+    </div>
+    <span id="error-msg"></span>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>

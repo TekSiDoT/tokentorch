@@ -1,0 +1,153 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #1a1a1e;
+  color: #e0e0e0;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#app {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+
+#close-btn {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent;
+  color: #555;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 0;
+  z-index: 10;
+}
+
+#close-btn:hover {
+  background: #333;
+  color: #ccc;
+}
+
+#bars-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.usage-row {
+  display: grid;
+  grid-template-columns: 56px 1fr 42px;
+  grid-template-rows: auto auto;
+  gap: 4px 8px;
+  align-items: center;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #a0a0a0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.bar-container {
+  grid-column: 2;
+  grid-row: 1;
+  height: 14px;
+  background: #2a2a2e;
+  border-radius: 7px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 7px;
+  transition: width 0.6s ease, background-color 0.4s ease;
+  width: 0%;
+  background: #4a90d9;
+  min-width: 0;
+}
+
+.bar-fill.green {
+  background: linear-gradient(90deg, #43a047, #66bb6a);
+}
+
+.bar-fill.yellow {
+  background: linear-gradient(90deg, #f9a825, #fdd835);
+}
+
+.bar-fill.red {
+  background: linear-gradient(90deg, #e53935, #ef5350);
+}
+
+.bar-fill.gray {
+  background: #555;
+}
+
+.bar-fill.red-blink {
+  background: linear-gradient(90deg, #e53935, #ef5350);
+  animation: blink 0.8s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.percent {
+  grid-column: 3;
+  grid-row: 1;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.reset {
+  grid-column: 2;
+  grid-row: 2;
+  font-size: 10px;
+  color: #777;
+}
+
+.projected {
+  grid-column: 3;
+  grid-row: 2;
+  font-size: 10px;
+  color: #888;
+  text-align: right;
+}
+
+#error-msg {
+  font-size: 10px;
+  color: #ef5350;
+}
+
+/* Projected indicator */
+.projected-marker {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 1px;
+}
