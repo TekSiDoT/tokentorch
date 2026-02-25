@@ -16,6 +16,7 @@ function updateBar(prefix, bar) {
   const pct = document.getElementById(`${prefix}-pct`);
   const reset = document.getElementById(`${prefix}-reset`);
   const proj = document.getElementById(`${prefix}-projected`);
+  const gap = document.getElementById(`${prefix}-gap`);
 
   if (!bar) {
     fill.style.width = '0%';
@@ -23,6 +24,7 @@ function updateBar(prefix, bar) {
     pct.textContent = '--%';
     reset.textContent = 'no data';
     proj.textContent = '';
+    gap.textContent = '';
     return;
   }
 
@@ -32,6 +34,7 @@ function updateBar(prefix, bar) {
   pct.textContent = `${Math.round(bar.utilization)}%`;
   reset.textContent = bar.reset_display;
   proj.textContent = `→ ${Math.round(bar.projected)}%`;
+  gap.textContent = bar.gap_display || '';
 
   // Projected marker
   const container = fill.parentElement;

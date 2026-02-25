@@ -37,6 +37,7 @@ pub struct UsageBar {
     pub projected: f64,
     pub color: UsageColor,
     pub reset_display: String,
+    pub gap_display: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -77,6 +78,7 @@ pub fn compute_usage_bar(label: &str, bucket: &UsageBucket, window_hours: f64) -
         compute_weekly_color(projected)
     };
     let reset_display = format_reset_time(seconds_remaining, &resets_at);
+    let gap_display = compute_gap_display(bucket.utilization, projected, seconds_remaining);
 
     UsageBar {
         label: label.to_string(),
@@ -86,6 +88,7 @@ pub fn compute_usage_bar(label: &str, bucket: &UsageBucket, window_hours: f64) -
         projected,
         color,
         reset_display,
+        gap_display,
     }
 }
 
@@ -129,6 +132,34 @@ fn format_reset_time(seconds_remaining: f64, resets_at: &DateTime<Utc>) -> Strin
         let local = resets_at.with_timezone(&chrono::Local);
         local.format("resets %a %l:%M %p").to_string()
     }
+}
+
+/// How long you'll be rate-limited before the window resets.
+/// Only shown when projected > 100%.
+fn compute_gap_display(utilization: f64, projected: f64, seconds_remaining: f64) -> Option<String> {
+    if projected <= 100.0 || seconds_remaining <= 0.0 {
+        return None;
+    }
+
+    let gap_secs = if utilization >= 100.0 {
+        // Already at the limit — gap is the full remaining time
+        seconds_remaining
+    } else {
+        // gap = remaining * (projected - 100) / (projected - utilization)
+        seconds_remaining * (projected - 100.0) / (projected - utilization)
+    };
+
+    let gap_secs = gap_secs.max(0.0);
+    let hours = (gap_secs / 3600.0).floor() as u64;
+    let minutes = ((gap_secs % 3600.0) / 60.0).ceil() as u64;
+
+    let time = if hours > 0 {
+        format!("{}h {}m", hours, minutes)
+    } else {
+        format!("{}m", minutes.max(1))
+    };
+
+    Some(format!("{} gap", time))
 }
 
 pub fn compute_state(response: &ApiUsageResponse) -> UsageState {

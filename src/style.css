@@ -122,11 +122,23 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-.reset {
+.info-row {
   grid-column: 2;
   grid-row: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reset {
   font-size: 10px;
   color: #777;
+}
+
+.gap {
+  font-size: 10px;
+  color: #c62828;
+  font-weight: 600;
 }
 
 .projected {
