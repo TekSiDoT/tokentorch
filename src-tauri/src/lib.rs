@@ -454,11 +454,11 @@ fn popup_position(pos: &tauri::PhysicalPosition<f64>) -> tauri::PhysicalPosition
 
 fn show_popup(app: &AppHandle, position: Option<tauri::PhysicalPosition<f64>>) {
     if let Some(window) = app.get_webview_window("popup") {
-        // Position near tray icon if we have coords
+        let _ = window.show();
+        // Position after show — macOS ignores set_position on hidden windows
         if let Some(pos) = position {
             let _ = window.set_position(tauri::Position::Physical(popup_position(&pos)));
         }
-        let _ = window.show();
         let _ = window.set_focus();
 
         // Re-emit current state so popup gets data
