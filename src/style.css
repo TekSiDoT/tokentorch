@@ -92,11 +92,11 @@ body {
 }
 
 .bar-fill.yellow {
-  background: linear-gradient(90deg, #f9a825, #fdd835);
+  background: linear-gradient(90deg, #ff9800, #ffb74d);
 }
 
 .bar-fill.red {
-  background: linear-gradient(90deg, #e53935, #ef5350);
+  background: linear-gradient(90deg, #c62828, #e53935);
 }
 
 .bar-fill.gray {
@@ -104,7 +104,7 @@ body {
 }
 
 .bar-fill.red-blink {
-  background: linear-gradient(90deg, #e53935, #ef5350);
+  background: linear-gradient(90deg, #c62828, #e53935);
   animation: blink 0.8s ease-in-out infinite;
 }
 

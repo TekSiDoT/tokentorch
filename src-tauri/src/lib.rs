@@ -247,8 +247,8 @@ fn update_tray_icon(tray: &tauri::tray::TrayIcon, state: Option<&UsageState>) {
 fn color_rgb(color: UsageColor) -> (u8, u8, u8) {
     match color {
         UsageColor::Green => (76, 175, 80),
-        UsageColor::Yellow => (255, 193, 7),
-        UsageColor::Red | UsageColor::RedBlink => (244, 67, 54),
+        UsageColor::Yellow => (255, 152, 0),
+        UsageColor::Red | UsageColor::RedBlink => (198, 40, 40),
         UsageColor::Gray => (120, 120, 120),
     }
 }
